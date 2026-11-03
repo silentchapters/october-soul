@@ -9,76 +9,82 @@
 
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      font-family: Georgia, serif;
+      min-height: 100svh;
       background: #392719;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      font-family: Georgia, serif;
+    }
+
+    /* The complete open book */
+
+    .book {
+      position: relative;
+      width: min(100%, 1100px);
+      aspect-ratio: 3 / 2;
+      flex-shrink: 0;
+    }
+
+    .book-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Shared page text styling */
+
+    .page {
+      position: absolute;
+      top: 17%;
+      bottom: 16%;
+      width: 37%;
       color: #291609;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      padding: 45px 20px;
-      position: relative;
+      font-family: Georgia, serif;
     }
 
-    /* Background book image */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("sunset-book.png");
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      z-index: 0;
-      pointer-events: none;
-    }
+    /* Left page */
 
-    .letter {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 760px;
-      padding: 45px 42px;
-      background: rgba(255, 239, 207, 0.18);
-      border: 1px solid rgba(65, 38, 18, 0.25);
-      box-shadow: 0 8px 30px rgba(30, 15, 5, 0.10);
+    .left-page {
+      left: 10%;
+      text-align: center;
+      padding: 2%;
     }
 
     .greeting {
-      text-align: center;
-      font-size: 19px;
+      font-size: clamp(7px, 1.15vw, 14px);
       letter-spacing: 2px;
-      margin-bottom: 35px;
+      margin-bottom: 6%;
     }
 
     .opening {
-      font-size: 21px;
-      line-height: 1.9;
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .opening strong {
-      color: #1d1008;
+      font-size: clamp(7px, 1.35vw, 16px);
+      line-height: 1.5;
+      margin-bottom: 7%;
     }
 
     .reminders {
       list-style: none;
-      padding: 0;
-      margin: 25px auto 35px;
-      max-width: 560px;
-      font-size: 19px;
-      line-height: 2.1;
+      text-align: left;
+      font-size: clamp(7px, 1.3vw, 15px);
+      line-height: 1.6;
     }
 
     .reminders li {
-      margin-bottom: 9px;
-      padding-left: 25px;
+      margin-bottom: 5%;
+      padding-left: 14px;
       position: relative;
     }
 
@@ -89,70 +95,94 @@
       color: #8c572e;
     }
 
-    .closing {
+    /* Right page */
+
+    .right-page {
+      right: 10%;
       text-align: center;
-      font-size: 23px;
-      line-height: 1.8;
-      margin-top: 35px;
+      padding: 2%;
+    }
+
+    .last-reminder {
+      font-size: clamp(7px, 1.3vw, 15px);
+      line-height: 1.55;
+      margin-bottom: 9%;
+    }
+
+    .closing {
+      font-size: clamp(7px, 1.4vw, 17px);
+      line-height: 1.5;
+      margin-bottom: 9%;
     }
 
     .final-words {
-      text-align: center;
-      font-size: 25px;
+      font-size: clamp(8px, 1.55vw, 19px);
       font-weight: bold;
-      margin-top: 28px;
-      line-height: 1.6;
-    }
-
-    .back-link {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .back-link a {
-      color: #291609;
-      font-size: 16px;
-      text-decoration: none;
-      border-bottom: 1px solid #8c572e;
-      padding-bottom: 5px;
-    }
-
-    .back-link a:hover {
-      opacity: 0.65;
+      line-height: 1.5;
     }
 
     /* Mobile adjustments */
+
     @media (max-width: 600px) {
 
-      body {
-        align-items: flex-start;
-        padding: 24px 12px;
+      .book {
+        width: 100vw;
       }
 
-      body::before {
-        background-size: contain;
-        background-position: center center;
-        background-attachment: scroll;
+      .page {
+        top: 17%;
+        bottom: 16%;
       }
 
-      .letter {
-        padding: 32px 22px;
+      .left-page {
+        left: 9%;
+        width: 39%;
+        padding: 1%;
+      }
+
+      .right-page {
+        right: 9%;
+        width: 39%;
+        padding: 1%;
+      }
+
+      .greeting {
+        font-size: 7px;
+        letter-spacing: 0.7px;
+        margin-bottom: 5%;
       }
 
       .opening {
-        font-size: 18px;
+        font-size: 7px;
+        line-height: 1.3;
+        margin-bottom: 5%;
       }
 
       .reminders {
-        font-size: 17px;
+        font-size: 7px;
+        line-height: 1.35;
+      }
+
+      .reminders li {
+        padding-left: 10px;
+        margin-bottom: 4%;
+      }
+
+      .last-reminder {
+        font-size: 7px;
+        line-height: 1.35;
+        margin-bottom: 6%;
       }
 
       .closing {
-        font-size: 20px;
+        font-size: 7px;
+        line-height: 1.35;
+        margin-bottom: 6%;
       }
 
       .final-words {
-        font-size: 22px;
+        font-size: 7px;
+        line-height: 1.4;
       }
     }
 
@@ -161,36 +191,55 @@
 
 <body>
 
-  <main class="letter">
+  <main class="book">
 
-    <div class="greeting">
-      A LITTLE NOTE FOR YOU
-    </div>
+    <!-- Original book artwork -->
 
-    <div class="opening">
-      Some days are heavier than others. Some moments ask more of us than we ever expected to give. But I hope <strong>YOU</strong> never forget that <strong>YOU</strong> don't have to carry everything with a smile.
-    </div>
+    <img
+      src="sunset-book.png"
+      alt="An open antique book overlooking a golden sunset"
+      class="book-image"
+    >
 
-    <ul class="reminders">
-      <li>Take your time.</li>
-      <li>Breathe.</li>
-      <li>Allow yourself to rest.</li>
-      <li>And whenever life feels a little too overwhelming, remember that there are people who care, people who are rooting for you, and one friend who will always wish to see you happy.</li>
-    </ul>
+    <!-- Left page -->
 
-    <div class="closing">
-      You've got me, just as I've got you.!!!
-    </div>
+    <section class="page left-page">
 
-    <div class="final-words">
-      Keep smiling, Zeeeeeeee. ❤️
-      <br><br>
-      And don't you ever give up!!
-    </div>
+      <div class="greeting">
+        A LITTLE NOTE FOR YOU
+      </div>
 
-    <div class="back-link">
-      <a href="index.html">← Back to the beginning</a>
-    </div>
+      <div class="opening">
+        Some days are heavier than others. Some moments ask more of us than we ever expected to give. But I hope <strong>YOU</strong> never forget that <strong>YOU</strong> don't have to carry everything with a smile.
+      </div>
+
+      <ul class="reminders">
+        <li>Take your time.</li>
+        <li>Breathe.</li>
+        <li>Allow yourself to rest.</li>
+      </ul>
+
+    </section>
+
+    <!-- Right page -->
+
+    <section class="page right-page">
+
+      <div class="last-reminder">
+        And whenever life feels a little too overwhelming, remember that there are people who care, people who are rooting for you, and one friend who will always wish to see you happy.
+      </div>
+
+      <div class="closing">
+        You've got me, just as I've got you.!!!
+      </div>
+
+      <div class="final-words">
+        Keep smiling, Zeeeeeeee. ❤️
+        <br><br>
+        And don't you ever give up!!
+      </div>
+
+    </section>
 
   </main>
 
