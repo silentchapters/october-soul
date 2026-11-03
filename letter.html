@@ -84,17 +84,16 @@
     }
 
     .reminders li {
-  margin-bottom: 5%;
   position: relative;
   padding-left: 0;
+  text-align: center;
 }
 
-    .reminders li::before {
-      content: "❧";
-      position: absolute;
-      left: 0;
-      color: #8c572e;
-    }
+.reminders li::before {
+  content: "❧";
+  position: static;
+  margin-right: 5px;
+}
 
     /* Right page */
 
@@ -164,9 +163,17 @@
         line-height: 1.35;
       }
 
-     .reminders li {
+    .reminders li {
+  position: relative;
   padding-left: 0;
   margin-bottom: 4%;
+  text-align: center;
+}
+
+.reminders li::before {
+  content: "❧";
+  position: static;
+  margin-right: 5px;
 }
 
       .last-reminder {
